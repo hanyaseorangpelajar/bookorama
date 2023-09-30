@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\BookController;
+use App\Models\Book;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,60 +34,7 @@ Route::get('/about', function () {
     );
 });
 
-Route::get('/books', function () {
-    $books = [
-        [
-            "title" => "Jawir",
-            "slug" => 'jawir',
-            "author" => "Mas Rusdi",
-            "synopsis" => "Djawir adalah koentji"
-        ],
-        [
-            "title" => "Sir",
-            'slug' => 'sir',
-            "author" => "Mas Cadi",
-            "synopsis" => "Sir adalah koentji"
-        ]
-    ];
-
-    return view(
-        'books',
-        [
-            "title" => "Books",
-            "books" => $books
-        ]
-    );
-});
+Route::get('/books', [BookController::class, 'index']);
 
 // halaman single book
-Route::get('/books/{slug}', function ($slug) {
-    $books = [
-        [
-            "title" => "Jawir",
-            "slug" => 'jawir',
-            "author" => "Mas Rusdi",
-            "synopsis" => "Djawir adalah koentji"
-        ],
-        [
-            "title" => "Sir",
-            'slug' => 'sir',
-            "author" => "Mas Cadi",
-            "synopsis" => "Sir adalah koentji"
-        ]
-    ];
-
-    $new_book = [];
-    foreach ($books as $book) {
-        if ($book['slug'] === $slug) {
-            $new_book = $book;
-        }
-    }
-
-    return view(
-        'book',
-        [
-            'title' => 'Detail Book',
-            'book' => $new_book
-        ]
-    );
-});
+Route::get('/books/{slug}', [BookController::class, 'show']);
