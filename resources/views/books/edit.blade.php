@@ -9,8 +9,8 @@
         </div>
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" class="form-control" value="{{ $book->title }}"
-                @error('title') is-invalid @enderror>
+            <input type="text" name="title" id="title" class="form-control"
+                value="{{ old('title', $book->title) }}" @error('title') is-invalid @enderror>
             @error('title')
                 <div class="alert alert-danger" role="alert">
                     {{ $message }}
@@ -19,8 +19,8 @@
         </div>
         <div class="form-group">
             <label for="author">Author</label>
-            <input type="text" name="author" id="author" class="form-control" value="{{ $book->author }}"
-                @error('author') is-invalid @enderror>
+            <input type="text" name="author" id="author" class="form-control"
+                value="{{ old('author', $book->author) }}" @error('author') is-invalid @enderror>
             @error('author')
                 <div class="alert alert-danger" role="alert">
                     {{ $message }}
@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
             <label for="price">Price</label>
-            <input type="number" name="price" id="price" step="0.01" value="{{ $book->price }}"
+            <input type="number" name="price" id="price" step="0.01" value="{{ old('price', $book->price) }}"
                 class="form-control" @error('price') is-invalid @enderror>
             @error('price')
                 <div class="alert alert-danger" role="alert">
@@ -40,11 +40,13 @@
         <div class="form-group">
             <label for="categoryid">Category</label>
             <select name="categoryid" id="categoryid" class="form-control" @error('categoryid') is-invalid @enderror>
-                <option value="" {{ old('categoryid') == null ? 'selected' : '' }} disabled>--- Select Category ---
+                <option value="" {{ old('categoryid', $book->categoryid) == null ? 'selected' : '' }} disabled>---
+                    Select Category ---
                 </option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->categoryid }}"
-                        {{ $book->categoryid == $category->categoryid ? 'selected' : '' }}>{{ $category->name }}</option>
+                        {{ old('categoryid', $book->categoryid) == $category->categoryid ? 'selected' : '' }}>
+                        {{ $category->name }}</option>
                 @endforeach
             </select>
             @error('categoryid')
