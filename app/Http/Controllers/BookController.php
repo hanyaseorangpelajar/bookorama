@@ -16,4 +16,14 @@ class BookController extends Controller
             compact('books', 'page_title')
         );
     }
+
+    public function add(Request $request)
+    {
+        $message = 'Peler';
+        $page_title = 'Add Book';
+        return view(
+            'books.add_book',
+            compact('message', 'page_title')
+        );
+    }
 }

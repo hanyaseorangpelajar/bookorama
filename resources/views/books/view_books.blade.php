@@ -1,6 +1,11 @@
 @extends('layouts.book_main')
 
 @section('card-body')
+    <form action="{{ route('books.add_book') }}" method="post" style="display: inline">
+        @csrf
+        @method('POST')
+        <button type="submit" class="btn btn-primary mb-4">Add Book</button>
+    </form>
     <table class="table table-striped">
         <tr>
             <th>ISBN</th>
