@@ -30,17 +30,35 @@ class BookController extends Controller
 
     public function store(Request $request)
     {
+        $custom_messages = [
+            'required' => ':attribute column must be filled!',
+            'unique' => ':attribute :value already exist!'
+        ];
+
+        $custom_attributes = [
+            'isbn' => 'ISBN',
+            'title' => 'Title',
+            'author' => 'Author',
+            'price' => 'Price',
+            'categoryid' => 'Category'
+        ];
+
         $validated_data = $request->validate([
             'isbn' => 'required|unique:books',
             'title' => 'required',
             'author' => 'required',
             'price' => 'required',
             'categoryid' => 'required'
-        ]);
+        ], $custom_messages, $custom_attributes);
+
+        $custom_messages = array_map(function ($message) {
+            return ucfirst($message);
+        }, $custom_messages);
+
+
+        // $category = Category::find($validated_data['categoryid']);
 
         Book::create($validated_data);
-
-        $category = Category::find($validated_data['categoryid']);
 
         return view('books.books', compact('category'));
     }
