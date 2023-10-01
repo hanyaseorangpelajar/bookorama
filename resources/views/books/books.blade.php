@@ -18,7 +18,7 @@
                 <td>{{ $book->title }}</td>
                 <td>{{ $book->category->name }}</td>
                 <td>{{ $book->author }}</td>
-                <td>{{ $book->price }}</td>
+                <td>${{ $book->price }}</td>
                 <td>
                     <a href="{{ route('books.edit', ['isbn' => $book->isbn]) }}" class="btn btn-warning btn-sm">Edit</a>
                     <a href="{{ route('books.confirm-delete', $book->isbn) }}" class="btn btn-danger btn-sm">Delete</a>

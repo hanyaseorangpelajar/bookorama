@@ -1,6 +1,6 @@
 @extends('layouts.book_main')
 @section('card-body')
-    <form action="{{ $route }}" method="put">
+    <form action="{{ $route }}" method="post">
         @csrf
         @method('PUT')
         <div class="form-group">

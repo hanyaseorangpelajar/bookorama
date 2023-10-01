@@ -9,8 +9,9 @@ class Book extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
+    protected $primaryKey = 'isbn';
     protected $table = 'books';
+
 
     protected $fillable = [
         'isbn',
@@ -19,6 +20,9 @@ class Book extends Model
         'price',
         'categoryid'
     ];
+
+    public $timestamps = false;
+    public $incrementing = false;
 
     public function category()
     {

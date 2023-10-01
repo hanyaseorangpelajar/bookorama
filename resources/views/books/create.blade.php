@@ -4,7 +4,7 @@
         @csrf
         <div class="form-group">
             <label for="isbn">ISBN</label>
-            <input type="text" name="isbn" id="isbn" class="form-control" value="{{ old('isbn') }}"
+            <input type="text" name="isbn" id="isbn" class="form-control" maxlength="13" value="{{ old('isbn') }}"
                 @error('isbn') is-invalid @enderror>
             @error('isbn')
                 <div class="alert alert-danger" role="alert">
@@ -14,8 +14,8 @@
         </div>
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}"
-                @error('title') is-invalid @enderror>
+            <input type="text" name="title" id="title" class="form-control" maxlength="100"
+                value="{{ old('title') }}" @error('title') is-invalid @enderror>
             @error('title')
                 <div class="alert alert-danger" role="alert">
                     {{ $message }}
@@ -24,8 +24,8 @@
         </div>
         <div class="form-group">
             <label for="author">Author</label>
-            <input type="text" name="author" id="author" class="form-control" value="{{ old('author') }}"
-                @error('author') is-invalid @enderror>
+            <input type="text" name="author" id="author" class="form-control" maxlength=50"
+                value="{{ old('author') }}" @error('author') is-invalid @enderror>
             @error('author')
                 <div class="alert alert-danger" role="alert">
                     {{ $message }}
