@@ -108,4 +108,32 @@ class BookController extends Controller
 
         return redirect()->route('books.index')->with('success', 'Book updated successfully!');
     }
+
+    public function confirmDelete($isbn)
+    {
+        $page_title = 'Delete Book';
+
+        $book = Book::where('isbn', $isbn)->first();
+        if (!$book) {
+            abort(404, 'Book not found');
+        }
+
+        $categories = Category::all();
+        return view(
+            'books.confirm-delete',
+            compact('book', 'categories', 'page_title')
+        )->with('route', route('books.destroy', ['isbn' => $book->isbn]));
+    }
+
+    public function destroy($isbn)
+    {
+        $book = Book::where('isbn', $isbn)->first();
+        if (!$book) {
+            abort(404, 'Book not found');
+        }
+
+        $book->delete();
+
+        return redirect()->route('books.index')->with('success', 'Book deleted successfully!');
+    }
 }
