@@ -10,7 +10,7 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::with('category')->get();
-        $page_title = 'Daftar Buku';
+        $page_title = 'Book List';
         return view(
             'books.view_books',
             compact('books', 'page_title')

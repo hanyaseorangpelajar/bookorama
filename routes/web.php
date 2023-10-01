@@ -35,3 +35,7 @@ Route::get('/about', function () {
 });
 
 Route::get('/view_books', [BookController::class, 'index']);
+
+Route::get('view_books/{isbn}/edit_book', [BookController::class, 'edit'])->name('books.edit_book');
+
+Route::post('view_books/{isbn}/delete_book', [BookController::class, 'delete'])->name('books.delete_book');

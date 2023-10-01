@@ -19,7 +19,12 @@
                 <td>{{ $book->author }}</td>
                 <td>{{ $book->price }}</td>
                 <td>
-                    Kamu Peler
+                    <a href="{{ route('books.edit_book', $book->isbn) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('books.delete_book', $book->isbn) }}" method="post" style="display: inline">
+                        @csrf
+                        @method('POST')
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
                 </td>
             </tr>
         @endforeach
