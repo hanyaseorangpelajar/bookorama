@@ -45,12 +45,11 @@
         <div class="form-group">
             <label for="categoryid">Category</label>
             <select name="categoryid" id="categoryid" class="form-control" @error('categoryid') is-invalid @enderror>
-                <option value="">
-                    --- Select Category ---
+                <option value="" {{ old('categoryid') == null ? 'selected' : '' }} disabled>--- Select Category ---
                 </option>
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">
-                        {{ $category->name }}</option>
+                    <option value="{{ $category->categoryid }}"
+                        {{ old('categoryid') == $category->categoryid ? 'selected' : '' }}>{{ $category->name }}</option>
                 @endforeach
             </select>
             @error('categoryid')

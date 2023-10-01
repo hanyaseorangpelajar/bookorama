@@ -56,10 +56,11 @@ class BookController extends Controller
         }, $custom_messages);
 
 
-        // $category = Category::find($validated_data['categoryid']);
+        $category = Category::where('categoryid', $validated_data['categoryid'])->pluck('categoryid')->first();
 
         Book::create($validated_data);
 
-        return view('books.books', compact('category'));
+        $books = Book::with('category')->get();
+        return $this->index();
     }
 }
