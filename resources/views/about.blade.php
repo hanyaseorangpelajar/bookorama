@@ -30,7 +30,6 @@
         </tr>
     </table>
     <p style="text-align: center;">
-        <em><strong>"Aku mah masih pemula, ajarin dong, puh sepuh. Puh sepuh, ajarin dong, masih pemula aku, puh sepuh. Tinky Winky, Dipsy, Lala, puh sepuh, ajarin dong, puh sepuh."</strong></em>
     </p>
 </div>
 @endsection
