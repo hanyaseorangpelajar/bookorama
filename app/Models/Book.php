@@ -2,41 +2,23 @@
 
 namespace App\Models;
 
-// use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Book
+class Book extends Model
 {
-    private static $books = [
-        [
-            "title" => "Jawir",
-            "slug" => 'jawir',
-            "author" => "Mas Rusdi",
-            "synopsis" => "Djawir adalah koentji"
-        ],
-        [
-            "title" => "Sir",
-            'slug' => 'sir',
-            "author" => "Mas Kudis",
-            "synopsis" => "Sir adalah koentji"
-        ]
+    protected $table = 'books';
+
+    protected $fillable = [
+        'isbn',
+        'title',
+        'author',
+        'price',
+        'categoryid'
     ];
 
-    public static function all()
+    public function category()
     {
-        return collect(self::$books);
-    }
-
-    public static function find($slug)
-    {
-        $books = static::all();
-        // $book = [];
-        // foreach ($books as $b) {
-        //     if ($b['slug'] === $slug) {
-        //         $book = $b;
-        //     }
-        // }
-        // return $book;
-        return $books->firstWhere('slug', $slug);
+        return $this->belongsTo(Category::class, 'categoryid', 'categoryid');
     }
 }

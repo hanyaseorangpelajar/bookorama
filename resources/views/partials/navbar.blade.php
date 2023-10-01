@@ -6,14 +6,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item {{ $title == 'Home' ? 'active' : '' }}">
+            <li class="nav-item {{ $page_title == 'Home' ? 'active' : '' }}">
                 <a class="nav-link" href="/">Home</a>
             </li>
-            <li class="nav-item {{ $title == 'About' ? 'active' : '' }}">
+            <li class="nav-item {{ $page_title == 'About' ? 'active' : '' }}">
                 <a class="nav-link" href="/about">About</a>
             </li>
-            <li class="nav-item {{ $title == 'Books' ? 'active' : '' }}">
-                <a class="nav-link" href="/books">Books</a>
+            <li class="nav-item {{ $page_title == 'View Books' ? 'active' : '' }}">
+                <a class="nav-link" href="/view_books">View Books</a>
             </li>
         </ul>
     </div>

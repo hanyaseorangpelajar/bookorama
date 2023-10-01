@@ -9,23 +9,11 @@ class BookController extends Controller
 {
     public function index()
     {
+        $books = Book::with('category')->get();
+        $page_title = 'Daftar Buku';
         return view(
-            'books',
-            [
-                "title" => "Books",
-                "books" => Book::all()
-            ]
-        );
-    }
-
-    public function show($slug)
-    {
-        return view(
-            'book',
-            [
-                'title' => 'Detail Book',
-                'book' => Book::find($slug)
-            ]
+            'books.view_books',
+            compact('books', 'page_title')
         );
     }
 }

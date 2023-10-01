@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view(
         'home',
-        ['title' => 'Home']
+        ['page_title' => 'Home']
     );
 });
 
@@ -27,14 +27,11 @@ Route::get('/about', function () {
     return view(
         'about',
         [
-            "title" => 'About',
+            "page_title" => 'About',
             "name" => "Pria Bibir Pink",
             "project" => "Bookorama"
         ]
     );
 });
 
-Route::get('/books', [BookController::class, 'index']);
-
-// halaman single book
-Route::get('/books/{slug}', [BookController::class, 'show']);
+Route::get('/view_books', [BookController::class, 'index']);
