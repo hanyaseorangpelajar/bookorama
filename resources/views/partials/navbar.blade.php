@@ -12,8 +12,8 @@
             <li class="nav-item {{ $page_title == 'About' ? 'active' : '' }}">
                 <a class="nav-link" href="/about">About</a>
             </li>
-            <li class="nav-item {{ $page_title == 'View Books' ? 'active' : '' }}">
-                <a class="nav-link" href="/view_books">Book List</a>
+            <li class="nav-item {{ $page_title == 'Book List' ? 'active' : '' }}">
+                <a class="nav-link" href="/books">Book List</a>
             </li>
         </ul>
     </div>
