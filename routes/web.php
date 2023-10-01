@@ -34,13 +34,17 @@ Route::get('/about', function () {
     );
 });
 
+// Read books
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 
+// Create book
 Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
 Route::post('/books', [BookController::class, 'store'])->name('books.store');
 
-// Route::post('/add_book', [BookController::class, 'add']);
+// Update book
+Route::get('/books/{isbn}/edit', [BookController::class, 'edit'])->name('books.edit');
+Route::put('/books/{isbn}', [BookController::class, 'update'])->name('books.update');
 
-// Route::get('view_books/{isbn}/edit_book', [BookController::class, 'edit'])->name('books.edit_book');
-
-// Route::post('view_books/{isbn}/delete_book', [BookController::class, 'delete'])->name('books.delete_book');
+// Delete book
+Route::get('/books/{isbn}/confirm-delete', [BookController::class, 'confirmDelete'])->name('books.confirm-delete');
+Route::delete('/books/{isbn}', [BookController::class, 'destroy'])->name('books.destroy');

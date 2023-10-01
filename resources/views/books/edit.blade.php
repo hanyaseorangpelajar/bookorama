@@ -1,20 +1,15 @@
 @extends('layouts.book_main')
 @section('card-body')
-    <form action="{{ $route }}" method="post">
+    <form action="{{ $route }}" method="put">
         @csrf
+        @method('PUT')
         <div class="form-group">
             <label for="isbn">ISBN</label>
-            <input type="text" name="isbn" id="isbn" class="form-control" value="{{ old('isbn') }}"
-                @error('isbn') is-invalid @enderror>
-            @error('isbn')
-                <div class="alert alert-danger" role="alert">
-                    {{ $message }}
-                </div>
-            @enderror
+            <input type="text" name="isbn" id="isbn" class="form-control" disabled value="{{ $book->isbn }}">
         </div>
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}"
+            <input type="text" name="title" id="title" class="form-control" value="{{ $book->title }}"
                 @error('title') is-invalid @enderror>
             @error('title')
                 <div class="alert alert-danger" role="alert">
@@ -24,7 +19,7 @@
         </div>
         <div class="form-group">
             <label for="author">Author</label>
-            <input type="text" name="author" id="author" class="form-control" value="{{ old('author') }}"
+            <input type="text" name="author" id="author" class="form-control" value="{{ $book->author }}"
                 @error('author') is-invalid @enderror>
             @error('author')
                 <div class="alert alert-danger" role="alert">
@@ -34,7 +29,7 @@
         </div>
         <div class="form-group">
             <label for="price">Price</label>
-            <input type="number" name="price" id="price" step="0.01" value="{{ old('price') }}"
+            <input type="number" name="price" id="price" step="0.01" value="{{ $book->price }}"
                 class="form-control" @error('price') is-invalid @enderror>
             @error('price')
                 <div class="alert alert-danger" role="alert">
@@ -49,7 +44,7 @@
                 </option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->categoryid }}"
-                        {{ old('categoryid') == $category->categoryid ? 'selected' : '' }}>{{ $category->name }}</option>
+                        {{ $book->categoryid == $category->categoryid ? 'selected' : '' }}>{{ $category->name }}</option>
                 @endforeach
             </select>
             @error('categoryid')
@@ -58,7 +53,7 @@
                 </div>
             @enderror
         </div>
-        <button type="submit" class="btn btn-primary">Add Book</button>
+        <button type="submit" class="btn btn-primary">Edit Book</button>
         <a href="/books" class="btn btn-secondary">Back</a>
     </form>
 @endsection

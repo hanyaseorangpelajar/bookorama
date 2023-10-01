@@ -1,7 +1,7 @@
 @extends('layouts.book_main')
 
 @section('card-body')
-    <a href="{{ route('books.create') }}" class="btn btn-primary mb-4">Tambah Buku</a>
+    <a href="{{ route('books.create') }}" class="btn btn-primary mb-4">Add Book</a>
     <table class="table table-striped">
         <tr>
             <th>ISBN</th>
@@ -20,12 +20,8 @@
                 <td>{{ $book->author }}</td>
                 <td>{{ $book->price }}</td>
                 <td>
-                    {{-- <a href="{{ route('books.edit_book', $book->isbn) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('books.delete_book', $book->isbn) }}" method="post" style="display: inline">
-                        @csrf
-                        @method('POST')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form> --}}
+                    <a href="{{ route('books.edit', ['isbn' => $book->isbn]) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{{ route('books.confirm-delete', $book->isbn) }}" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
         @endforeach

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+    // Select all books
     public function index()
     {
         $books = Book::with('category')->get();
@@ -18,6 +19,7 @@ class BookController extends Controller
         );
     }
 
+    // Show add book page
     public function create()
     {
         $page_title = 'Add Book';
@@ -28,6 +30,7 @@ class BookController extends Controller
         )->with('route', route('books.store'));
     }
 
+    // Add book logic
     public function store(Request $request)
     {
         $custom_messages = [
@@ -51,16 +54,58 @@ class BookController extends Controller
             'categoryid' => 'required'
         ], $custom_messages, $custom_attributes);
 
-        $custom_messages = array_map(function ($message) {
-            return ucfirst($message);
-        }, $custom_messages);
-
-
-        $category = Category::where('categoryid', $validated_data['categoryid'])->pluck('categoryid')->first();
-
         Book::create($validated_data);
 
-        $books = Book::with('category')->get();
-        return $this->index();
+        return redirect()->route('books.index')->with('success', 'Book added successfully!');
+    }
+
+    public function edit($isbn)
+    {
+        $page_title = 'Edit Book';
+
+        $book = Book::where('isbn', $isbn)->first();
+        if (!$book) {
+            abort(404, 'Book not found');
+        }
+
+        $categories = Category::all();
+        return view(
+            'books.edit',
+            compact('book', 'categories', 'page_title')
+        )->with('route', route('books.update', ['isbn' => $book->isbn]));
+    }
+
+    public function update(Request $request, $isbn)
+    {
+        $book = Book::where('isbn', $isbn)->first();
+        if (!$book) {
+            abort(404, 'Book not found!');
+        }
+
+        $custom_messages = [
+            'required' => ':attribute column must be filled!',
+        ];
+
+        $custom_attributes = [
+            'title' => 'Title',
+            'author' => 'Author',
+            'price' => 'Price',
+            'categoryid' => 'Category'
+        ];
+
+        $validated_data = $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'price' => 'required',
+            'categoryid' => 'required'
+        ], $custom_messages, $custom_attributes);
+
+        if ($request->has('isbn') && $request->isbn !== $isbn) {
+            return redirect()->back()->withErrors(['isbn' => 'ISBN can not be changed!']);
+        }
+
+        $book->update($validated_data);
+
+        return redirect()->route('books.index')->with('success', 'Book updated successfully!');
     }
 }
