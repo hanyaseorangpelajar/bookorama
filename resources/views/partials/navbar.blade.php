@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item {{ $page_title == 'Home' ? 'active' : '' }}">
-                <a class="nav-link" href="/" target="_blank">Home</a>
+                <a class="nav-link" href="/" >Home</a>
             </li>
             <li class="nav-item {{ $page_title == 'About' ? 'active' : '' }}">
                 <a class="nav-link" href="/about">About</a>
